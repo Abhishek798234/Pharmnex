@@ -1,0 +1,106 @@
+PharmnEx - Local Setup and Run Instructions
+============================================
+
+These instructions run the frontend and backend on a Windows computer using
+PowerShell. Run all commands from the PharmnEx project folder.
+
+Prerequisites
+-------------
+Install the following before starting:
+
+1. Node.js 20 LTS or later (includes npm)
+   https://nodejs.org/
+
+2. Python 3.12 or later
+   https://www.python.org/downloads/
+   During installation, select "Add Python to PATH".
+
+Check the installations:
+
+  node --version
+  npm --version
+  python --version
+
+Initial Setup (run once)
+------------------------
+
+1. Open PowerShell in this project directory:
+
+  cd "C:\path\to\pharmnex"
+
+2. Install WEB (frontend) dependencies:
+
+  cd "C:\path\to\pharmnex\apps\web"
+  npm install
+
+3. Install API (backend) dependencies:
+
+  cd "C:\path\to\pharmnex\apps\api"
+  python -m venv .venv
+  .\.venv\Scripts\Activate.ps1
+
+  If PowerShell blocks activation, run this once in the same PowerShell window,
+  then activate the environment again:
+
+  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+  Install every dependency listed for the API:
+
+  python -m pip install --upgrade pip
+  python -m pip install -r requirements.txt
+
+4. Seed the local SQLite database with the demo data and accounts:
+
+  python seed.py
+  cd ..\..
+
+Run the Project
+---------------
+
+Open TWO PowerShell windows in the project directory.
+
+Terminal 1 - Backend API:
+
+  cd "C:\path\to\pharmnex\apps\api"
+  .\.venv\Scripts\Activate.ps1
+  python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+
+Backend URLs:
+  API:          http://127.0.0.1:8000
+  Swagger docs: http://127.0.0.1:8000/docs
+
+Terminal 2 - Frontend:
+
+  cd "C:\path\to\pharmnex\apps\web"
+  npm run dev
+
+Open the application:
+  http://localhost:3000
+
+Quick Windows Option
+--------------------
+
+After completing the initial setup above, you may instead double-click these
+files from the project folder to start each service:
+
+  run_backend.bat
+  run_frontend.bat
+
+Demo Login Accounts
+-------------------
+
+  Admin:        admin@pharmnex.io / admin123
+  Supplier:     supplier@pharmnex.io / supplier123
+  Manufacturer: manufacturer@pharmnex.io / manufacturer123
+  Wholesaler:   wholesaler@pharmnex.io / wholesaler123
+  Distributor:  distributor@pharmnex.io / distributor123
+  Customer:     customer@pharmnex.io / customer123
+
+Notes
+-----
+
+- The default local database is apps\api\pharmnex.db (SQLite). PostgreSQL,
+  Redis, Algorand, and MLflow are not required for the default local setup.
+- Stop either server by focusing its terminal and pressing Ctrl+C.
+- If port 3000 or 8000 is already in use, stop the process using that port or
+  choose a different port and update the relevant frontend/backend configuration.
