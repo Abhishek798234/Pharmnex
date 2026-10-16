@@ -184,21 +184,51 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Demo credentials hint */}
-        <div className="mt-4 p-4 rounded-xl text-center"
-          style={{ background: "rgba(0,212,255,0.04)", border: "1px solid rgba(0,212,255,0.08)" }}>
-          <p className="text-xs font-medium mb-2" style={{ color: "#00D4FF" }}>Demo Credentials</p>
-          <div className="grid grid-cols-2 gap-2 text-xs" style={{ color: "#64748b" }}>
-            <span>Admin: admin@pharmnex.io</span>
-            <span>Pass: admin123</span>
+        {/* Interactive Demo credentials selector */}
+        <div className="mt-5 p-4 rounded-2xl"
+          style={{ background: "rgba(0,212,255,0.03)", border: "1px solid rgba(0,212,255,0.12)" }}>
+          <div className="flex items-center justify-between mb-2.5">
+            <p className="text-xs font-semibold tracking-wider uppercase font-mono" style={{ color: "#00D4FF" }}>
+              ⚡ 1-Click Demo Accounts
+            </p>
+            <span className="text-[11px] text-slate-500 font-mono">Password: [role]123</span>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2">
+            {[
+              { label: "Admin", email: "admin@pharmnex.io", pass: "admin123", color: "#00F0FF" },
+              { label: "Manufacturer", email: "manufacturer@pharmnex.io", pass: "manufacturer123", color: "#10B981" },
+              { label: "Distributor", email: "distributor@pharmnex.io", pass: "distributor123", color: "#F59E0B" },
+              { label: "Wholesaler", email: "wholesaler@pharmnex.io", pass: "wholesaler123", color: "#8B5CF6" },
+              { label: "Supplier", email: "supplier@pharmnex.io", pass: "supplier123", color: "#38BDF8" },
+              { label: "Customer", email: "customer@pharmnex.io", pass: "customer123", color: "#F43F5E" },
+            ].map((acc) => (
+              <button
+                key={acc.label}
+                type="button"
+                onClick={() => {
+                  setEmail(acc.email);
+                  setPassword(acc.pass);
+                }}
+                className="py-1.5 px-2 text-xs font-medium rounded-lg border transition-all text-left flex flex-col hover:scale-[1.02] active:scale-[0.98]"
+                style={{
+                  background: email === acc.email ? `${acc.color}20` : "rgba(15,23,42,0.6)",
+                  borderColor: email === acc.email ? acc.color : "rgba(51,65,85,0.6)",
+                  color: email === acc.email ? acc.color : "#94a3b8",
+                }}
+              >
+                <span className="font-semibold text-[11px]">{acc.label}</span>
+                <span className="text-[9px] text-slate-500 truncate">{acc.email.split("@")[0]}</span>
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Algorand badge */}
-        <div className="flex items-center justify-center gap-2 mt-6">
+        <div className="flex items-center justify-center gap-2 mt-5">
           <div className="pulse-dot" />
-          <span className="text-xs" style={{ color: "#475569" }}>
-            Secured by Algorand TestNet blockchain
+          <span className="text-xs" style={{ color: "#64748b" }}>
+            Dual-Layer Persisted: SQLite + Algorand TestNet
           </span>
         </div>
       </div>

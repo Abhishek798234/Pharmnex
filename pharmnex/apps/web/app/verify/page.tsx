@@ -74,17 +74,24 @@ export default function VerifySearchPage() {
           </form>
 
           {/* Quick Demo Links */}
-          <div className="pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-4 text-xs">
-            <span className="text-slate-500 font-mono">Try sample batch:</span>
+          <div className="pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-3 text-xs">
+            <span className="text-slate-500 font-mono">Try verified batches:</span>
+            <Link
+              href="/verify/BATCH-2026-0921-A"
+              className="font-mono text-cyan-300 font-semibold hover:underline px-3 py-1.5 rounded-lg bg-cyan-950/40 border border-cyan-500/30 flex items-center gap-1.5"
+            >
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+              BATCH-2026-0921-A (Live Seed)
+            </Link>
             <Link
               href="/verify/BN-2026-8891"
-              className="font-mono text-cyan-400 hover:underline px-3 py-1 rounded-lg bg-slate-900 border border-slate-800"
+              className="font-mono text-cyan-400 hover:underline px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800"
             >
               BN-2026-8891 (Amoxicillin)
             </Link>
             <Link
               href="/verify/BN-2026-9012"
-              className="font-mono text-cyan-400 hover:underline px-3 py-1 rounded-lg bg-slate-900 border border-slate-800"
+              className="font-mono text-cyan-400 hover:underline px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800"
             >
               BN-2026-9012 (Metformin)
             </Link>
